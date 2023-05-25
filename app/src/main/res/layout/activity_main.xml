@@ -110,7 +110,7 @@
                 </LinearLayout>
 
                 <EditText
-                    android:id="@+id/lambdaIn"
+                    android:id="@+id/clientIn"
                     android:layout_width="180dp"
                     android:layout_height="0dp"
                     android:layout_marginTop="10dp"
@@ -189,7 +189,7 @@
                 android:background="@color/neutral">
 
                 <Switch
-                    android:id="@+id/switch2"
+                    android:id="@+id/switchQueue"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="20dp"
@@ -250,6 +250,7 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     android:background="@android:drawable/editbox_background"
+                    android:backgroundTint="@color/neutral"
                     android:ems="10"
                     android:enabled="false"
                     android:hint="Введите значение..."
@@ -263,7 +264,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/calculateButton"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
                 android:backgroundTint="@android:color/holo_green_dark"
