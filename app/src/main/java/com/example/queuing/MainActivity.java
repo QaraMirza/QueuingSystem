@@ -1,26 +1,28 @@
 package com.example.queuing;
 
-import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private View channelIn, clientIn, serviceIn, queueIn;
+    private EditText channelIn, clientIn, serviceIn, queueIn;
+    private double client, service;
+
+    private int queue, channel;
     private Switch switchQueue;
     private Button calculateButton;
     private TextView systemLoadView, loadPerChannelView, downtimeProbabilityView,
             failureProbabilityView, numberOfApplicationsView, waitingTimeView, servedCustomersView,
-            serviceTimeView, appsInSystemView, timeInSystemView, relativeAbiliryView, AbsoluteAbilityView;
+            serviceTimeView, appsInSystemView, timeInSystemView, relativeAbilityView, absoluteAbilityView;
     private boolean isQueueExists;
 
     @Override
@@ -38,13 +40,25 @@ public class MainActivity extends AppCompatActivity {
         calculateButton = findViewById(R.id.calculateButton);
 
         systemLoadView = findViewById(R.id.systemLoadView);
+        loadPerChannelView = findViewById(R.id.loadPerChannelView);
+        downtimeProbabilityView = findViewById(R.id.downtimeProbabilityView);
+        failureProbabilityView = findViewById(R.id.failureProbabilityView);
+        numberOfApplicationsView = findViewById(R.id.numberOfApplicationsView);
+        waitingTimeView = findViewById(R.id.waitingTimeView);
+        servedCustomersView = findViewById(R.id.servedCustomersView);
+        serviceTimeView = findViewById(R.id.serviceTimeView);
+        appsInSystemView = findViewById(R.id.appsInSystemView);
+        timeInSystemView = findViewById(R.id.timeInSystemView);
+        relativeAbilityView = findViewById(R.id.relativeAbilityView);
+        absoluteAbilityView = findViewById(R.id.absoluteAbilityView);
 
         isQueueExists = false;
 
-        //Neutral color
+        //Colors
         ColorStateList neutralColorSL = queueIn.getBackgroundTintList();
         ColorStateList whiteColorSL = clientIn.getBackgroundTintList();
 
+        CalculatorQS calculator = new CalculatorQS();
 
         //Switch button listener
         switchQueue.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -67,6 +81,24 @@ public class MainActivity extends AppCompatActivity {
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!isQueueExists) {
+                    channel = Integer.parseInt(String.valueOf(channelIn.getText()));
+                    client = Double.parseDouble(String.valueOf(clientIn.getText()));
+                    service = Double.parseDouble(String.valueOf(serviceIn.getText()));
+                    calculator.calculate(channel, client, service);
+                }
+                systemLoadView.setText(calculator.getSystemLoad());
+                loadPerChannelView.setText(calculator.getLoadPerChannel());
+                downtimeProbabilityView.setText(calculator.getDowntimeProbability());
+                failureProbabilityView.setText(calculator.getFailureProbability());
+                numberOfApplicationsView.setText(calculator.getNumberOfApplications());
+                waitingTimeView.setText(calculator.getWaitingTime());
+                servedCustomersView.setText(calculator.getServedCustomers());
+                serviceTimeView.setText(calculator.getServiceTime());
+                appsInSystemView.setText(calculator.getAppsInSystem());
+                timeInSystemView.setText(calculator.getTimeInSystem());
+                relativeAbilityView.setText(calculator.getRelativeAbility());
+                absoluteAbilityView.setText(calculator.getAbsoluteAbility());
 
             }
         });
