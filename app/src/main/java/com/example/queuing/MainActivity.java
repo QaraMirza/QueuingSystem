@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -86,6 +85,12 @@ public class MainActivity extends AppCompatActivity {
                     client = Double.parseDouble(String.valueOf(clientIn.getText()));
                     service = Double.parseDouble(String.valueOf(serviceIn.getText()));
                     calculator.calculate(channel, client, service);
+                } else {
+                    channel = Integer.parseInt(String.valueOf(channelIn.getText()));
+                    client = Double.parseDouble(String.valueOf(clientIn.getText()));
+                    service = Double.parseDouble(String.valueOf(serviceIn.getText()));
+                    queue = Integer.parseInt(String.valueOf(queueIn.getText()));
+                    calculator.calculate(channel, client, service, queue);
                 }
                 systemLoadView.setText(calculator.getSystemLoad());
                 loadPerChannelView.setText(calculator.getLoadPerChannel());
@@ -93,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 failureProbabilityView.setText(calculator.getFailureProbability());
                 numberOfApplicationsView.setText(calculator.getNumberOfApplications());
                 waitingTimeView.setText(calculator.getWaitingTime());
-                servedCustomersView.setText(calculator.getServedCustomers());
+                servedCustomersView.setText(calculator.getServedApplications());
                 serviceTimeView.setText(calculator.getServiceTime());
                 appsInSystemView.setText(calculator.getAppsInSystem());
                 timeInSystemView.setText(calculator.getTimeInSystem());
